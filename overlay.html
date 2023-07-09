@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omega Strikers Player Stats Overlay</title>
+    <link rel="icon" href="image/pageIcon.png">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body id="overlayPage">
+    <main>
+        <article id="playerOverlay" class="borderColor">
+          <div class="label">
+            <img src="image/RankedTiers/Rank_Low_Rookie.webp" height="70" id="tierImg" alt="ranked tier image">
+            <div id="mainUserData">
+              <h2><a id="username">Username</a> <a id="region" class="regionColor">EU</a> <a id="ranking" class="regionColor">#000</a></h2>
+              <h2 class="rankingColor"><a id="tier">Rookie low</a>・<a id="rating">25</a> LP</h2>
+            </div>
+          </div>
+          <div class="statsLabel firstLabel borderColor label">
+            <span class="statInfo">
+              <h2 class="statName">Games</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">W/L</h2>
+              <h2 class="statValue">0/0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">WR</h2>
+              <h2 class="statValue">0.0%</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">MVP</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+          </div>
+          <div class="statsLabel secondLabel borderColor label">
+            <span class="statInfo">
+              <h2 class="statName">Scores</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">Assists</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">Saves</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">KOs</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+          </div>
+          <div class="statsLabel thirdLabel borderColor label">
+            <span class="statInfo">
+              <h2 class="statName">W/L</h2>
+              <h2 class="statValue">0/0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">LP GAIN</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">Fav. strikers</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+            <span class="statInfo">
+              <h2 class="statName">Fav. Role</h2>
+              <h2 class="statValue">0</h2>
+            </span>
+          </div>
+      </article>
+    </main>
+    <script src="userData.js"></script>
+  </body>
+</html>

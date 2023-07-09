@@ -1,0 +1,555 @@
+:root {
+    --panelBgColor: #1c1c1c;
+    --panelBorderColor: #272727;
+    --panelInputBgColor: #333;
+    --panelInputColor: #8e8e8e;
+    --panelHColor: #b9b9b9;
+    --panelInputHoverColor: #444;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#mainPage {
+    background-color: #f2f2f2;
+}
+
+#mainPage main {
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    transform: translate(0, -50%);
+    margin-left: calc(50% - 22.5%);
+}
+
+#mainPage::after {
+    content: '';
+    background-image: url("image/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    background-position-x: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    filter: brightness(0.45);
+}
+
+a {
+    text-decoration: none;
+}
+
+#strikr h2 {
+    margin: 0px;
+    color: rgb(223, 223, 223);
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+form, #strikr {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--panelBgColor);
+    border: 1px solid var(--panelBorderColor);
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    display: block;
+}
+
+#strikr img {
+    opacity: 80%;
+    margin-top: 3px;
+    transition: opacity 200ms ease-in-out;
+}
+
+#strikr:hover img {
+    opacity: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: #fff;
+    width: 70%;
+    background-color: transparent;
+}
+
+#mainPage div {
+    border-radius: 4px;
+    width: 100%;
+    display: flex;
+    background-color: var(--panelInputBgColor);
+}
+
+#themePanel option [value="custom"] {
+    display: none;
+}
+
+select[title="region"] {
+    width: 30%;
+    background-color: var(--panelInputBgColor);
+    border: none;
+    outline: none;
+    color: var(--panelInputColor);
+    text-align: center;
+    cursor: pointer;
+    border-left: 1px solid var(--panelInputHoverColor);
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4caf4f52;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a0498c;
+}
+
+footer, #privacyInfo {
+    bottom: 0;
+    padding: 0;
+    position: absolute;
+    color: #bfbfbf;
+    font-style: oblique;
+}
+
+footer p, #privacyInfo {
+    margin: 0px;
+    text-align: center;
+}
+
+#privacyInfo {
+    padding: 10px;
+}
+
+[alt="main logo"] {
+    width: 650px;
+    margin: 0px 0px 30px calc(50% - 325px);
+}
+
+#configurationPage {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#configurationPage::after {
+    content: '';
+    background-image: url("image/area.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    background-position-x: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    transform: scale(1.01);
+    filter: brightness(0.65) blur(2px);
+}
+
+article {
+    padding: 15px;
+    border: 1px solid #6b6889;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #000023;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+article div:nth-child(1) {
+    display: inline-flex;
+}
+
+#mainUserData {
+    margin-left: 7px;
+}
+
+#mainUserData h2 {
+    margin: 0px;
+    text-transform: uppercase;
+}
+
+#mainUserData #username {
+    color: white;
+    overflow: hidden;
+    max-width: 300px;
+    display: inline-flex;
+    margin-top: 5px;
+}
+
+#mainUserData #region, #mainUserData #ranking {
+    color: #97baff;
+}
+
+#mainUserData h2:nth-child(1){
+    font-size: 17px;
+    margin-top: 9.5px;
+}
+
+#mainUserData h2:nth-child(2){
+    color: #aaabc7;
+    font-size: 21px;
+}
+
+#configurationPage main {
+    position: absolute;
+    width: 70%;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#configurationPage img[alt="main logo"] {
+    margin: 12px 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    width: 400px;
+}
+
+#configurationPage aside {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    padding-top: 10px;
+    border-left: 5px solid var(--panelBorderColor);
+    background-color: var(--panelBgColor);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: grid;
+    background: linear-gradient(29deg, rgba(28,28,28,1) 28%, rgba(34,34,34,1) 46%, rgba(28,28,28,1) 67%);
+}
+
+#playerOverlay {
+    display: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.statsLabel {
+    display: flex;
+    justify-content: space-around;
+    text-align: center; 
+    margin-top: 3px;
+    border-top: 1px solid #6b6889;
+    padding-top: 3px;
+
+}
+
+.statsLabel .statName {
+    font-size: 16px;
+    font-weight: 110;
+    text-transform: uppercase;
+    color: #aaabc7;
+}
+
+.statsLabel .statValue {
+    font-size: 18px;
+    color: white;
+}
+
+#favStrikersList {
+    width: 116px;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+}
+
+#favStrikersList img {
+    background-repeat: no-repeat;
+    margin-top: -5px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #6b6889;
+    background-size: cover;
+}
+
+#favStrikersDiv {
+    visibility: hidden;
+}
+
+aside select {
+    appearance: none;
+    padding: 7px;
+    font-size: 13px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--panelInputBgColor);
+    color: var(--panelInputColor);
+    cursor: pointer;
+    padding-right: 0px;
+    border: 1px solid var(--panelBgColor);
+    width: 100%;
+}
+
+#themePanel select {
+    width: 20%;
+}
+
+aside select * {
+    background-color: var(--panelInputBgColor);
+}
+
+.selectDiv span, #themePanel span {
+    width: 23%;
+}
+
+.selectDiv span::after, #themePanel span::after {
+    content: '';
+    width: 15px;
+    height: 7px;
+    position: absolute;
+    margin-left: -25px;
+    margin-top: 12px;
+    background-color: var(--panelInputColor);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    pointer-events: none;
+}
+
+#themePanel span::after {
+    margin-top: 28px;
+}
+
+.selectDiv {
+    padding: 0px 20px;
+    justify-content: space-between;
+    display: flex;
+}
+
+aside label, #backgroundPanel span {
+    margin-left: 20px;
+    color: var(--panelHColor);
+    -webkit-user-select: none;
+    user-select: none;
+    display: block;
+    position: relative;
+    width: max-content;
+}
+
+#backgroundPanel span {
+    width: 100%;
+    margin-left: 0px;
+}
+
+aside label {
+    cursor: pointer;
+}
+
+#labelConf h3, #themePanel h3 {
+    padding-left: 30px;
+}
+
+#themeConf #colorsPanel h3 {
+    padding-left: 70px;
+}
+
+aside label input[type="checkbox"] {
+    display: none;
+}
+
+.customCheckbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 19px;
+    background-color: var(--panelBorderColor);
+    border-radius: 3px;
+    border: 1px solid var(--panelBgColor);
+    cursor: pointer;
+}
+
+aside label:hover input[type="checkbox"] ~ .customCheckbox {
+    background-color: var(--panelInputBgColor);
+}
+
+aside label input[type="checkbox"]:checked ~ .customCheckbox {
+    background-color: var(--panelInputHoverColor);
+}
+
+.customCheckbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--panelBorderColor);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+aside label input[type="checkbox"]:checked ~ .customCheckbox:after {
+    display: block;
+}
+
+aside hr {
+    border: 1px solid var(--panelBorderColor);
+}
+
+aside h1 {
+    padding-left: 10px;
+    color: whitesmoke;
+}
+
+input[type=color]{
+	width: 60px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+	background: none;
+    border: solid 1px var(--panelInputBgColor);
+    position: absolute;
+    top: -5px;
+    cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+	border: solid 5px var(--panelBorderColor);
+	border-radius: 15px;
+}
+
+#themeConf #colorsPanel {
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-around;
+}
+
+#themeConf label {
+    margin-left: 0px;
+}
+
+#backgroundPanel {
+    padding: 0px 20px;
+    justify-content: space-around;
+    display: flex;
+}
+
+#backgroundPanel h3 {
+    text-align: center;
+}
+
+#backgroundPanel select {
+    width: 100%;
+    text-align: center;
+}
+
+input[type=file]::file-selector-button {
+    display: none;
+}
+
+input[type=file] {
+    padding: 7px;
+    font-size: 13px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--panelInputBgColor);
+    color: var(--panelInputColor);
+    cursor: pointer;
+    padding-right: 0px;
+    width: 90%;
+    margin-left: 3%;
+    border: 1px solid var(--panelBgColor);
+}
+
+#buttonsPanel {
+    padding: 0px 20px;
+    justify-content: center;
+    display: flex;
+    max-height: 50px;
+}
+
+input[type=file], select, input[type=color] {
+    transition: color 100ms ease;
+}
+
+input[type=file]:hover, select:hover {
+    background-color: var(--panelInputHoverColor);
+}
+
+#colorsPanel label:hover input::-webkit-color-swatch {
+    border-color: var(--panelInputBgColor);
+}
+
+#buttonsPanel button {
+    padding: 15px;
+    font-size: 13px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    width: 26%;
+    color: rgb(199, 199, 199);
+}
+
+#buttonsPanel button:nth-child(1) {
+    margin-right: 30px;
+    background-color: #af4c4c52;
+}
+
+#buttonsPanel button:nth-child(1):hover {
+    margin-right: 30px;
+    background-color: #a045458c;
+}
+
+#buttonsPanel button:nth-child(2) {
+    background-color: #4caf4f52;
+}
+
+#buttonsPanel button:nth-child(2):hover {
+    background-color: #45a0498c;
+}
+
+#themePanel h3 {
+    color: var(--panelHColor);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#overlayPage main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
