@@ -101,7 +101,6 @@ input[type="text"] {
 }
 
 select[title="region"] {
-    width: 30%;
     background-color: var(--panelInputBgColor);
     border: none;
     outline: none;
@@ -109,6 +108,26 @@ select[title="region"] {
     text-align: center;
     cursor: pointer;
     border-left: 1px solid var(--panelInputHoverColor);
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    padding-right: 10px;
+}
+
+#mainPage div span {
+    width: 30%;
+}
+
+#mainPage div span::after {
+    content: '';
+    width: 15px;
+    height: 7px;
+    position: absolute;
+    margin-left: -25px;
+    margin-top: 14px;
+    background-color: var(--panelInputColor);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    pointer-events: none;
 }
 
 input[type="submit"] {

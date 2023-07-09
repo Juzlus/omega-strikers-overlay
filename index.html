@@ -10,18 +10,20 @@
   <body id="mainPage">
     <main>
       <img src="image/om-pso.png" loading="lazy" alt="main logo">
-      <form method="get" action="configuration.html">
+      <form autocomplete="off" method="get" action="configuration.html">
         <div>
-          <input type="text" id="username" name="username" placeholder="Enter your username..." required>
-          <select name="region" title="region" required>
-            <option value="Global" selected>Global</option>
-            <option value="Asia">Asia</option>
-            <option value="NorthAmerica">North America</option>
-            <option value="SouthAmerica">South America</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-            <option value="Japanese">Japanese</option>
-          </select>
+          <input autocomplete="off" type="text" id="username" name="username" placeholder="Enter your username..." required>
+          <span>
+            <select name="region" title="region" required>
+              <option value="Global" selected>Global</option>
+              <option value="Asia">Asia</option>
+              <option value="NorthAmerica">North America</option>
+              <option value="SouthAmerica">South America</option>
+              <option value="Europe">Europe</option>
+              <option value="Oceania">Oceania</option>
+              <option value="Japanese">Japanese</option>
+            </select>
+          </span>
         </div>
         <input type="submit" value="Search">
       </form>
