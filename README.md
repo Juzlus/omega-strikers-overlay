@@ -14,8 +14,8 @@ Go to the [Omega Strikers User Stats Overlay](https://juzlus.github.io/omega-str
 _This page exclusively presents ranked statistics for the top **10,000** players from each region._
 ## Screenshots
 
-![Main Menu](https://github.com/Juzlus/omega-strikers-overlay/blob/main/image/Screenshots/ss1.jpg?raw=true)
-![Configuration Menu](https://github.com/Juzlus/omega-strikers-overlay/blob/main/image/Screenshots/ss2.jpg?raw=true)
+![Main Menu](https://github.com/Juzlus/omega-strikers-overlay/blob/main/image/Screenshots/ss1.JPG?raw=true)
+![Configuration Menu](https://github.com/Juzlus/omega-strikers-overlay/blob/main/image/Screenshots/ss2.JPG?raw=true)
 
 
 ## Feedback
@@ -28,6 +28,7 @@ If you have any Feedback or questions, please contact me at juzlus.biznes@gmail.
   <a href="https://www.buymeacoffee.com/juzlus" target="_blank" alt="buymeacoffee" style="width: 40%; text-decoration: none; margin-right: 20px;">
     <img src="https://www.codehim.com/wp-content/uploads/2022/09/bmc-button-640x180.png" style="height: 60px;">
   </a>
+  <a>⠀</a>
   <a href="https://buycoffee.to/juzlus" target="_blank" alt="buycoffee" style="text-decoration: none; width: 40%; background-color: rgb(0, 169, 98);border-radius: 10px;">
     <img src="https://buycoffee.to/btn/buycoffeeto-btn-primary.svg" style="height: 60px">
   </a>
