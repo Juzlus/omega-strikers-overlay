@@ -96,7 +96,7 @@ function refreshData(labelConfig, noBack, session) {
             if(!data) return noUser(noBack);
 
             const rating = data?.ratings[data?.ratings?.length - 1];
-            if(rating?.rank == 10001) return noUser(noBack);
+            if(!data?.characterRatings?.length) return noUser(noBack);
 
             switch(data?.region) {
                 case "Asia":
@@ -196,8 +196,9 @@ function refreshData(labelConfig, noBack, session) {
                 forward += el?.role == "Forward" ? 1 : 0;
                 goalie += el?.role == "Goalie" ? 1 : 0;
 
-                const strikerName = el?.character?.slice(3)?.replace('MagicalPlaymaker', 'MagicalPlaymaker_Default');
-                favStrikers[strikerName] = favStrikers[strikerName] ? + favStrikers[strikerName] + el?.games : el?.games;
+                const strikerName = el?.character?.slice(3)?.replace('MagicalPlaymaker', 'MagicalPlaymaker_Default')?.replace('EDMOni', 'AN_EDMOni');
+                if(strikerName)
+                    favStrikers[strikerName] = favStrikers[strikerName] ? + favStrikers[strikerName] + el?.games : el?.games;
             });
             favStrikers = Object.fromEntries(
                 Object.entries(favStrikers).sort(([,a],[,b]) => b-a)
@@ -277,7 +278,7 @@ function displayUserData(labelConfig, position) {
                 break;
             case 'C': // Fav. Strikers
                 name = "Fav. Strikers";
-                value = `<span id="favStrikersList"><img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[0]}.png&w=128&q=75"><img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[1]}.png&w=128&q=75"><img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[2]}.png&w=128&q=75"></span><div id="favStrikersDiv">.</div>`;
+                value = `<span id="favStrikersList">${Object?.keys(favStrikers)[0] ? `<img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[0]}.png&w=128&q=75">` : ''}${Object?.keys(favStrikers)[1] ? `<img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[1]}.png&w=128&q=75">` : ''}${Object?.keys(favStrikers)[2] ? `<img class="borderColor" src="https://strikr.gg/_next/image?url=https%3A%2F%2Fstatic.strikr.gg%2Ffile%2FStrikr%2Fcharacter%2Fportrait%2FT_UI_Portrait_CloseUp_${Object?.keys(favStrikers)[2]}.png&w=128&q=75">` : ''}</span><div id="favStrikersDiv">.</div>`;
                 break;
             case 'D': // Session W/L
                 name = "W/L";
