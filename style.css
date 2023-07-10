@@ -212,8 +212,6 @@ footer p, #privacyInfo {
     bottom: 0;
     right: 0;
     z-index: -1;
-    transform: scale(1.01);
-    filter: brightness(0.65) blur(0.2vh);
 }
 
 article {
