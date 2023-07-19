@@ -49,34 +49,14 @@ function refreshData(labelConfig, noBack, session) {
                     scores
                     wins
                 }
-                createdAt
-                emoticonId
-                id
-                logoId
-                mastery {
-                    currentLevel
-                    currentLevelXp
-                    playerId
-                    totalXp
-                    xpToNextLevel
-                }
                 nameplateId
                 ratings {
                     createdAt
-                    games
                     id
-                    losses
-                    masteryLevel
-                    playerId
                     rank
                     rating
-                    wins
                 }
                 region
-                tags
-                titleId
-                updatedAt
-                userId
                 username
             }
         }
