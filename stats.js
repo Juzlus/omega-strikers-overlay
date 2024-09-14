@@ -44,12 +44,12 @@ function getStatInfo(session = {}) {
         },
         {
             name: "Scores",
-            code: "{games}",
+            code: "{scores}",
             value: `${data?.overallStats ? data?.overallStats?.forwards?.scores + data?.overallStats?.goalies?.scores : 0}`
         },
         {
             name: "Assists",
-            code: "{scores}",
+            code: "{assists}",
             value: `${data?.overallStats ? data?.overallStats?.forwards?.assists + data?.overallStats?.goalies?.assists : 0}`
         },
         {

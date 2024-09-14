@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omega Strikers Player Stats Overlay</title>
+    <link rel="icon" href="image/pageIcon.png">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="stats.js"></script>
+    <script src="configuration.js"></script>
+  </head>
+  <body id="streamelementsPage">
+    <main>
+      <span id="mainLogoSpan">
+        <img src="image/om-pso.png" loading="lazy" alt="main logo">
+      </span>
+      <div>
+        <textarea id="streamelementsRaw" oninput="previewFormated(this);"></textarea>
+      </div>
+      <div>
+        <textarea id="streamelementsFormated"></textarea>
+      </div>
+      <div>
+        <button onclick="window.open('index.html', '_self')">BACK</button>
+        <button onclick="createLinkStreamElements();">COPY LINK</button>
+      </div>
+    </main>
+    <footer>
+      <p>This website is an independent platform and is not affiliated with Odyssey Interactive. The content and views expressed on this page do not represent the opinions of Odyssey Interactive or any individuals officially associated with the development or management of Omega Strikers. Omega Strikers and Odyssey Interactive are trademarks or registered trademarks of Odyssey Interactive.</p>
+    </footer>
+  </body>
+</html>

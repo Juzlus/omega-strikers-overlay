@@ -17,11 +17,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#mainPage {
+#mainPage, #streamelementsPage {
     background-color: #f2f2f2;
 }
 
-#mainPage main {
+#mainPage main, #streamelementsPage main {
     position: absolute;
     top: 50%;
     width: 45%;
@@ -29,7 +29,7 @@ body {
     margin-left: calc(50% - 22.5%);
 }
 
-#mainPage::after {
+#mainPage::after, #streamelementsPage::after {
     content: '';
     background-image: url("image/bg.jpg");
     background-repeat: no-repeat;
@@ -42,6 +42,23 @@ body {
     right: 0;
     z-index: -1;
     filter: brightness(0.45);
+}
+
+#streamelementsPage::after {
+    filter: blur(0.3vh) brightness(0.45);
+    scale: 1.1;
+    position: fixed;
+}
+
+#streamelementsPage textarea {
+    background-color: var(--panelBgColor);
+    border: 0.1vh solid var(--panelBorderColor);
+    box-shadow: 0 0.2vh 0.5vh rgba(0, 0, 0, 0.1);
+    border-radius: 1.5vh;
+    max-width: 40vh;
+    margin: 0 auto;
+    padding: 2vh;
+    resize: none;
 }
 
 a {

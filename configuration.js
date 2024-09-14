@@ -178,27 +178,27 @@ async function setupConfiguration() {
     }, 5 * 60 * 1000);
 }
 
-async function convertViewToText(update=false) {
-    const queryParams = new URLSearchParams(window?.location?.search);
-    const username = queryParams?.get('username');
-    let view = queryParams?.get('view');
-
-    if (update)
-        await $.ajax({ url: `https://clarioncorp.net/api/lookup/${username}`, method: 'GET',
-            success: function(response) {
-                localStorage.setItem("lastUser", JSON.stringify(response));
-            },
-            error: function(error) {
-                console.error(error);
-                return document.body.innerText = 'Player not found!';
-            }
-        });
-
+function convertViewToText(text) {
     const stats = getStatInfo();
     stats?.filter(el => el?.code).forEach(el => {
         const re = new RegExp(String.raw`${el?.code}`, "gi");
-        view = view.replace(re, el?.value);
+        text = text.replace(re, el?.value);
     });
 
-    document.body.innerText = view;
+    return text;
+}
+
+function previewFormated(e) {
+    document.getElementById('streamelementsFormated').value = convertViewToText(e.value);
+}
+
+function createLinkStreamElements() {
+    let data = localStorage.getItem("lastUser");
+    if (!data) return;
+    data = JSON.parse(data); 
+
+    const raw = document.getElementById("streamelementsRaw").value;
+    const fetchURL = `http://juzlus-omega-strikers.infinityfreeapp.com/?view=${raw}&username=\$\{pathescape \$\{1\} | ${data?.rankedStats?.username}\}`;
+    const link = `\$\{sender\} \$(customapi. '${fetchURL}')`;
+    navigator.clipboard.writeText(link);
 }
