@@ -6,32 +6,57 @@
     <title>Omega Strikers Player Stats Overlay</title>
     <link rel="icon" href="image/pageIcon.png">
     <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      async function findUser(e) {
+        if (e?.keyCode != 13)
+          return;
+
+        const type = document.querySelector("select[name='type']").value;
+        const username = document.getElementById("username").value;
+        if(!username)
+          return;
+        document.getElementById("loading").style.display = 'block';
+
+        let lastUser = localStorage.getItem("lastUser");
+        if (lastUser) {
+          lastUser = JSON.parse(lastUser);
+          if (lastUser?.rankedStats?.username == username?.toLowerCase())
+            window.open(`${type}-configuration.html`, '_self');
+        }
+
+        try {
+          const data = await $.ajax({ url: `https://clarioncorp.net/api/lookup/${username}`, method: 'GET' });
+          localStorage.setItem("lastUser", JSON.stringify(data));
+          window.open(`${type}-configuration.html`, '_self');
+        }
+        catch(e) {
+          alert("Player not found!");
+          document.getElementById("loading").style.display = 'none';
+        }
+      }
+    </script>
   </head>
   <body id="mainPage">
+    <span id="loading"></span>
     <main>
       <span id="mainLogoSpan">
         <img src="image/om-pso.png" loading="lazy" alt="main logo">
       </span>
-      <form autocomplete="off" method="get" action="configuration.html">
+      <article>
         <div>
-          <input autocomplete="off" type="text" id="username" name="username" placeholder="Enter your username..." required>
+          <input autocomplete="off" type="text" id="username" onkeypress="findUser(event);" name="username" placeholder="Enter your username..." required>
           <span>
-            <select name="region" title="region" required>
-              <option value="Global" selected>Global</option>
-              <option value="Asia">Asia</option>
-              <option value="NorthAmerica">North America</option>
-              <option value="SouthAmerica">South America</option>
-              <option value="Europe">Europe</option>
-              <option value="Oceania">Oceania</option>
-              <option value="Japanese">Japanese</option>
+            <select name="type" title="type" required>
+              <option value="overlay" selected>Overlay</option>
+              <option value="streamelements">StreamElements</option>
             </select>
           </span>
         </div>
-        <input type="submit" value="Search">
-      </form>
-
-      <a id="strikr" href="https://strikr.gg" target="_blank">
-        <img src="https://strikr.gg/i/misc/logo_full.svg" loading="lazy" alt="Strikr.gg logo" class="image">
+        <input type="button" onclick="findUser({ keyCode: 13 });" value="Search">
+      </article>
+      <a id="clarioncorp" href="https://clarioncorp.net/" target="_blank">
+        <img src="https://clarioncorp.net/i/misc/logo_full.svg" loading="lazy" alt="Clarioncorp.net logo" class="image">
         <h2>User data comes from this site</h2>
       </a>
     </main>

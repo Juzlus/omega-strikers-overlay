@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omega Strikers Player Stats Overlay</title>
+    <link rel="icon" href="image/pageIcon.png">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="stats.js"></script>
+    <script src="configuration.js"></script>
+  </head>
+  <body id="configurationPage">
+    <img src="image/om-pso.png" loading="lazy" alt="main logo">
+    <main>
+        <article id="playerOverlay" class="borderColor grabLabel">
+          <div class="label">
+            <img src="image/RankedTiers/Rank_Low_Rookie.webp" id="tierImg" alt="ranked tier image">
+            <div id="mainUserData">
+              <h2><a id="username">Username</a> <span class="regionColor"><a id="region" >EU</a> <a id="ranking">#000</a> (Top <a id="topPercent">100%</a>)</span></h2>
+              <h2 class="rankingColor"><a id="tier">Rookie low</a>・<a id="rating">25</a> LP</h2>
+            </div>
+          </div>
+          <div class="statsLabel borderColor"></div>
+          <span style="width: inherit;">
+            <span class="labelLine borderColor" style="margin-top: -70px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -156px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -241px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -326px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -412px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -497px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -582px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -668px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -753px;"></span>
+          </span>
+      </article>
+      <p id="privacyInfo">This website is an independent platform and is not affiliated with Odyssey Interactive. The content and views expressed on this page do not represent the opinions of Odyssey Interactive or any individuals officially associated with the development or management of Omega Strikers. Omega Strikers and Odyssey Interactive are trademarks or registered trademarks of Odyssey Interactive.</p>
+    </main>
+    <aside>
+      <div id="labelConf">
+        <h1>Label Configuration</h1>
+        <hr>
+        <div class="statsGrab grabLabel">
+        </div>
+      </div>
+      <div id="themeConf">
+        <h1>Theme Configuration</h1>
+        <hr>
+        <div id="themePanel">
+          <h3>Theme</h3>
+          <span>
+            <select title="selectTheme" onchange="applyTheme(this?.value)">
+              <option value="dark-blue" selected>Dark Blue</option>
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+              <option value="custom">Custom</option>
+            </select>
+          </span>
+        </div>
+        <div id="colorsPanel">
+          <div>
+            <label>
+              <h3>Background Color</h3>
+              <input type="color" value="#000023" onchange="document.querySelector('#themePanel select').value = 'custom';" oninput="changeColor(this?.value, '#playerOverlay', 'background-color')">
+            </label>
+            <label>
+              <h3>Border Color</h3>
+              <input type="color" value="#6b6889" oninput="changeColor(this?.value, '.borderColor', 'border-color')">
+            </label>
+            <label>
+              <h3>Username Color</h3>
+              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '#username', 'color')">
+            </label>
+            <label>
+              <h3>Region Color</h3>
+              <input type="color" value="#97baff" oninput="changeColor(this?.value, '.regionColor', 'color')">
+            </label>
+          </div>
+          <div>
+            <label>
+              <h3>Ranking Color</h3>
+              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.rankingColor', 'color')">
+            </label>
+            <label>
+              <h3>Stats Name Color</h3>
+              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.statName', 'color')">
+            </label>
+            <label>
+              <h3>Stats Value Color</h3>
+              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '.statValue', 'color')">
+            </label>
+          </div>
+        </div>
+        <div id="backgroundPanel">
+          <span>
+            <h3>Background Image</h3>
+            <input placeholder="Choose a background image" type="file" id="file" name="file" onchange="setFile(this)">
+          </span>
+          <span>
+            <h3>Shape</h3>
+            <div class="selectDiv">
+              <span>
+                <select title="selectShape" id="shapeValue" onchange="changeShape(this.value)">
+                  <option value=1>Rectangle</option>
+                  <option value=2 selected>Rounded rectangle</option>
+                  <option value=3>Rounded rhomboid - left</option>
+                  <option value=4>Rounded rhomboid - right</option>
+                </select>
+              </span>
+            </div>
+          </span>
+          <span>
+            <h3>Transparency</h3>
+            <div class="selectDiv">
+              <span>
+                <select title="selectTransparency" id="transparencyValue" onchange="changeTrasparency(this.value)">
+                  <option value=0 selected>0%</option>
+                  <option value=10>10%</option>
+                  <option value=20>20%</option>
+                  <option value=30>30%</option>
+                  <option value=40>40%</option>
+                  <option value=50>50%</option>
+                </select>
+              </span>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="buttonsPanel">
+        <button type="button" onclick="window.open('index.html', '_self')"><b>BACK</a></b></button>
+        <button type="button" onclick="generateUrl()"><b>GENERATE URL</b></button>
+      </div>
+    </aside>
+    <script>
+      const mainDiv = document.querySelector('.statsGrab');
+      updateOverlay();
+      
+      const statsDiv = document.querySelectorAll('.statsGrab .statInfo');
+      let draggedEl = null;
+
+      statsDiv?.forEach(el => {
+        el.addEventListener('dragstart', function (e) {
+          draggedEl = e.target;
+        });
+        el.addEventListener("dblclick", function (e) {
+          mainDiv.appendChild(e.target);
+        });
+      });
+
+      const labels = document.querySelectorAll('.grabLabel');
+      labels.forEach(el => {
+        el.addEventListener('dragover', function (e) {
+          e.preventDefault();
+        });
+
+        el.addEventListener('drop', function (e) {
+          if (!draggedEl) return;
+          if (el.classList.contains("statInfo"))
+            el.before(draggedEl);
+          else
+            el.querySelector(".statsLabel").appendChild(draggedEl);
+          draggedEl = null;
+        });
+      });
+  </script>
+  <script>
+    const overlay = document.getElementById('playerOverlay');
+    const lines = document.querySelectorAll(".labelLine");
+
+    const resizeObserver = new ResizeObserver(e => {
+      for (let entry of e) {
+        const height = entry.contentRect.height;
+        const rows = height / 100 - 1;
+
+        lines?.forEach((el, i) => {
+          if (i <= rows)
+            el.style.display = 'block';
+          else
+            el.style.display = 'none';
+        });
+      }
+    });
+
+    resizeObserver.observe(overlay);
+  </script>
+  </body>
+</html>

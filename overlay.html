@@ -7,73 +7,32 @@
     <link rel="icon" href="image/pageIcon.png">
     <link href="style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="stats.js"></script>
+    <script src="configuration.js"></script>
   </head>
-  <body id="overlayPage">
+  <body id="overlayPage" onload="setupConfiguration();">
     <main>
-        <article id="playerOverlay" class="borderColor">
-          <div class="label">
-            <img src="image/RankedTiers/Rank_Low_Rookie.webp" id="tierImg" alt="ranked tier image">
-            <div id="mainUserData">
-              <h2><a id="username">Username</a> <a id="region" class="regionColor">EU</a> <a id="ranking" class="regionColor">#000</a></h2>
-              <h2 class="rankingColor"><a id="tier">Rookie low</a>・<a id="rating">25</a> LP</h2>
-            </div>
+      <article id="playerOverlay" class="borderColor grabLabel">
+        <div class="label">
+          <img src="image/RankedTiers/Rank_Low_Rookie.webp" id="tierImg" alt="ranked tier image">
+          <div id="mainUserData">
+            <h2><a id="username">Username</a> <span class="regionColor"><a id="region" >EU</a> <a id="ranking">#000</a> (Top <a id="topPercent">100%</a>)</span></h2>
+            <h2 class="rankingColor"><a id="tier">Rookie low</a>・<a id="rating">25</a> LP</h2>
           </div>
-          <div class="statsLabel firstLabel borderColor label">
-            <span class="statInfo">
-              <h2 class="statName">Games</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">W/L</h2>
-              <h2 class="statValue">0/0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">WR</h2>
-              <h2 class="statValue">0.0%</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">MVP</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-          </div>
-          <div class="statsLabel secondLabel borderColor label">
-            <span class="statInfo">
-              <h2 class="statName">Scores</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">Assists</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">Saves</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">KOs</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-          </div>
-          <div class="statsLabel thirdLabel borderColor label">
-            <span class="statInfo">
-              <h2 class="statName">W/L</h2>
-              <h2 class="statValue">0/0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">LP GAIN</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">Fav. strikers</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-            <span class="statInfo">
-              <h2 class="statName">Fav. Role</h2>
-              <h2 class="statValue">0</h2>
-            </span>
-          </div>
-      </article>
+        </div>
+        <div class="statsLabel borderColor"></div>
+        <span style="width: inherit;">
+          <span class="labelLine borderColor" style="margin-top: -70px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -156px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -241px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -326px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -412px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -497px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -582px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -668px;"></span>
+          <span class="labelLine borderColor" style="margin-top: -753px;"></span>
+        </span>
+    </article>
     </main>
-    <script src="userData.js"></script>
   </body>
 </html>

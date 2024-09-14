@@ -48,15 +48,16 @@ a {
     text-decoration: none;
 }
 
-#strikr h2 {
+#clarioncorp h2 {
     margin: 0px;
+    display: block;
     color: rgb(223, 223, 223);
     font-size: 1.2vh;
     margin-top: 0.8vh;
     margin-bottom: 0.5vh;
 }
 
-#strikr, #labelConf, #themeConf, main {
+#clarioncorp, #labelConf, #themeConf, main {
     font-size: 0px;
 }
 
@@ -64,7 +65,7 @@ input[type="color" i] {
     padding: 0.1vh 0.2vh;
 }
 
-form, #strikr {
+#mainPage article, #clarioncorp {
     max-width: 40vh;
     margin: 0 auto;
     padding: 2vh;
@@ -77,7 +78,7 @@ form, #strikr {
     display: block;
 }
 
-#strikr img {
+#clarioncorp img {
     opacity: 80%;
     margin-top: 0.3vh;
     width: 22vh;
@@ -85,7 +86,7 @@ form, #strikr {
     max-width: 36vw;
 }
 
-#strikr:hover img {
+#clarioncorp:hover img {
     opacity: 100%;
 }
 
@@ -100,7 +101,7 @@ input[type="text"] {
     font-size: 1.35vh;
     outline: none;
     color: #fff;
-    width: 70%;
+    width: 60%;
     background-color: transparent;
 }
 
@@ -115,7 +116,7 @@ input[type="text"] {
     display: none;
 }
 
-select[title="region"] {
+select[title="type"] {
     background-color: var(--panelInputBgColor);
     border: none;
     outline: none;
@@ -131,7 +132,7 @@ select[title="region"] {
 }
 
 #mainPage div span {
-    width: 30%;
+    width: 40%;
     font-size: 0px;
 }
 
@@ -151,7 +152,7 @@ select[title="region"] {
     font-size: 0px;
 }
 
-input[type="submit"] {
+input[type="button"] {
     display: block;
     width: 100%;
     font-size: 1.35vh;
@@ -165,7 +166,7 @@ input[type="submit"] {
     transition: background-color 200ms ease-in-out;
 }
 
-input[type="submit"]:hover {
+input[type="button"]:hover {
     background-color: #45a0498c;
 }
 
@@ -214,17 +215,16 @@ footer p, #privacyInfo {
     z-index: -1;
 }
 
-article {
+#overlayPage article, #playerOverlay article {
     padding: 1.5vh;
     border: 0.1vh solid #6b6889;
     border-radius: 1vh;
     display: inline-block;
     background-color: #000023;
-    max-width: 50vh;
     overflow: hidden;
 }
 
-article div:nth-child(1) {
+#overlayPage article div:nth-child(1), #playerOverlay article div:nth-child(1) {
     display: flex;
 }
 
@@ -245,7 +245,7 @@ article div:nth-child(1) {
     margin-top: 0.5vh;
 }
 
-#mainUserData #region, #mainUserData #ranking {
+.regionColor {
     color: #97baff;
 }
 
@@ -256,6 +256,7 @@ article div:nth-child(1) {
 
 #tierImg {
     width: 7vh;
+    align-self:center;
 }
 
 #mainUserData h2:nth-child(2){
@@ -296,33 +297,74 @@ article div:nth-child(1) {
     background: linear-gradient(29deg, rgba(28,28,28,1) 28%, rgba(34,34,34,1) 46%, rgba(28,28,28,1) 67%);
 }
 
+.label:first-child {
+    display: inline-flex;
+}
+
 #playerOverlay {
-    display: none;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    
+    background-color: rgb(0, 0, 36);
+    resize: horizontal;
+    overflow: auto;
+    padding: 25px;
+    min-width: 326px;
+    max-width: 1230px;
+    width: 326px;
+    border-radius: 10px;
+    border: 0.1vh solid #6b6889;
 }
 
-.statsLabel {
+.statsLabel, .statsGrab {
     display: flex;
     justify-content: space-around;
     text-align: center; 
     margin-top: 0.3vh;
-    border-top: 0.1vh solid #6b6889;
     padding-top: 0.3vh;
-
+    flex-wrap: wrap;
 }
 
-.statsLabel .statName {
+.statsLabel {
+    row-gap: 19px;
+    border-top: 0.1vh solid #6b6889;
+}
+
+.statsGrab {
+    display: inline-flex;
+}
+
+.statsGrab .statInfo {
+    user-select: none;
+    border: 0.1vh solid var(--panelBorderColor);
+    cursor: grab;
+}
+
+.statInfo {
+    min-width: 100px;
+}
+
+#labelConf .statInfo {
+    padding: 0 10px;
+}
+
+.statName {
     font-size: 1.6vh;
     font-weight: 110;
     text-transform: uppercase;
     color: #aaabc7;
+    pointer-events: none;
 }
 
-.statsLabel .statValue {
+.statValue {
     font-size: 1.8vh;
     color: white;
+    pointer-events: none;
+}
+
+#playerOverlay .statValue {
+    margin-bottom: 0px;
 }
 
 #favStrikersList {
@@ -330,6 +372,8 @@ article div:nth-child(1) {
     position: absolute;
     display: flex;
     justify-content: space-around;
+    margin-left: 2px;
+    scale: 1.2;
 }
 
 #favStrikersList img {
@@ -623,4 +667,59 @@ h3 {
         border-left: none;
         border-top: 0.65vh solid var(--panelBorderColor);
     }
+}
+
+
+#loading {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+}
+
+#loading::before {
+    content: '';
+    position: absolute;
+    margin-left: calc(50% - 44px);
+    margin-top: calc(25% - 21.1px);
+    width: 88px;
+    height: 42.2px;
+    background: radial-gradient(circle closest-side,#ffffff 90%,#0000) 0%   50%,
+           radial-gradient(circle closest-side,#ffffff 90%,#0000) 50%  50%,
+           radial-gradient(circle closest-side,#ffffff 90%,#0000) 100% 50%;
+    background-size: calc(100%/3) 21.1px;
+    background-repeat: no-repeat;
+    animation: dots-7ar3yq 1s infinite linear;
+}
+    
+@keyframes dots-7ar3yq {
+    20% {
+        background-position: 0%   0%, 50%  50%,100%  50%;
+    }
+    40% {
+        background-position: 0% 100%, 50%   0%,100%  50%;
+    }
+    60% {
+        background-position: 0%  50%, 50% 100%,100%   0%;
+    }
+    80% {
+        background-position: 0%  50%, 50%  50%,100% 100%;
+    }
+}
+
+.labelLine {
+    height: 0.1vh;
+    border-top: 0.1vh solid #6b6889;
+    margin-top: -156px;
+    position: absolute;
+    width: inherit;
+    min-width: 326px;
+    max-width: 1230px;
+    display: none;
+}
+
+#overlayPage #playerOverlay {
+    resize: none;
 }
