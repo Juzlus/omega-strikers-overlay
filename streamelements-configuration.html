@@ -10,22 +10,27 @@
     <script src="stats.js"></script>
     <script src="configuration.js"></script>
   </head>
-  <body id="streamelementsPage">
+  <body id="streamelementsPage" onload="setupLastView()">
     <main>
       <span id="mainLogoSpan">
         <img src="image/om-pso.png" loading="lazy" alt="main logo">
       </span>
-      <div>
-        <textarea id="streamelementsRaw" oninput="previewFormated(this);"></textarea>
-      </div>
-      <div>
-        <textarea id="streamelementsFormated"></textarea>
-      </div>
-      <div>
-        <button onclick="window.open('index.html', '_self')">BACK</button>
-        <button onclick="createLinkStreamElements();">COPY LINK</button>
+      <div id="streamelementsMain">
+        <div>
+          <textarea id="streamelementsRaw" placeholder="Enter text as expected response..." maxlength="381" onkeydown="removeNewLine(event);" oninput="previewFormated(this);"></textarea>
+          <a id="streamelementsLengthCount">381</a>
+        </div>
+        <div>
+          <textarea id="streamelementsFormated" placeholder="Output preview" readonly></textarea>
+        </div>
+        <div>
+          <button onclick="window.open('index.html', '_self')">BACK</button>
+          <button onclick="createLinkStreamElements(this);" class="copyText">COPY LINK</button>
+        </div>
       </div>
     </main>
+    <aside id="streamelementsStatCommand">
+    </aside>
     <footer>
       <p>This website is an independent platform and is not affiliated with Odyssey Interactive. The content and views expressed on this page do not represent the opinions of Odyssey Interactive or any individuals officially associated with the development or management of Omega Strikers. Omega Strikers and Odyssey Interactive are trademarks or registered trademarks of Odyssey Interactive.</p>
     </footer>

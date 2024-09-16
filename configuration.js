@@ -188,11 +188,19 @@ function convertViewToText(text) {
     return text;
 }
 
+let maxLength = 500 - 112 - 7;
 function previewFormated(e) {
     document.getElementById('streamelementsFormated').value = convertViewToText(e.value);
+    document.getElementById("streamelementsLengthCount").innerText = maxLength - document.getElementById('streamelementsRaw')?.value?.length;
+    localStorage.setItem("lastView", e.value); 
 }
 
-function createLinkStreamElements() {
+function removeNewLine(e) {
+    if(e.keyCode == 13)
+        e.preventDefault();
+}
+
+function createLinkStreamElements(e) {
     let data = localStorage.getItem("lastUser");
     if (!data) return;
     data = JSON.parse(data); 
@@ -201,4 +209,38 @@ function createLinkStreamElements() {
     const fetchURL = `http://juzlus-omega-strikers.infinityfreeapp.com/?view=${raw}&username=\$\{pathescape \$\{1\} | ${data?.rankedStats?.username}\}`;
     const link = `\$\{sender\} \$(customapi. '${fetchURL}')`;
     navigator.clipboard.writeText(link);
+
+    if (e.innerText != 'COPIED') {
+        e.innerText = 'COPIED';
+        setTimeout(() => {
+            e.innerText = 'COPY LINK';
+        }, 1500);
+    }
+
+}
+
+function createStatsBlock() {
+    const stats = getStatInfo();
+    let newHTML = '<p>Available variables</p>';
+    stats?.filter(el => el.code)?.forEach(el => newHTML += `<div>${el.name} - <a style="color: var(--panelInputColor)">${el.code}</a></div>` );
+    document.getElementById("streamelementsStatCommand").innerHTML = newHTML;
+}
+
+function setupLastView() {
+    const view = localStorage.getItem("lastView");
+    const sRaw = document.getElementById("streamelementsRaw");
+    if(view)
+        sRaw.value = view;
+    else
+        sRaw.value = "{username} {rating} LP ({rating_display}), Today's LP balance: {daily_lp}, Matches: {daily_wl} (W/L)";
+
+    let data = localStorage.getItem("lastUser");
+    if (!data) {
+        data = JSON.parse(data); 
+        maxLength = 500 - 112 - data?.rankedStats?.username?.length;
+        sRaw.setAttribute("maxlength", maxLength);
+    }
+
+    previewFormated(sRaw);
+    createStatsBlock();
 }
