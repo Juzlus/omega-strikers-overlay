@@ -11,29 +11,31 @@
     <script src="configuration.js"></script>
   </head>
   <body id="configurationPage">
-    <img src="image/om-pso.png" loading="lazy" alt="main logo">
+    <a href="index.html"><img src="image/om-pso.png" loading="lazy" alt="main logo"></a>
     <main>
+      <div>
         <article id="playerOverlay" class="borderColor grabLabel">
           <div class="label">
             <img src="image/RankedTiers/Rank_Low_Rookie.webp" id="tierImg" alt="ranked tier image">
             <div id="mainUserData">
-              <h2><a id="username">Username</a> <span class="regionColor"><a id="region" >EU</a> <a id="ranking">#000</a> (Top <a id="topPercent">100%</a>)</span></h2>
+              <h2><a id="username">Username</a> <span class="regionColor"><a id="region" >#</a><a id="ranking">#000</a> (Top <a id="topPercent">100%</a>)</span></h2>
               <h2 class="rankingColor"><a id="tier">Rookie low</a>・<a id="rating">25</a> LP</h2>
             </div>
           </div>
           <div class="statsLabel borderColor"></div>
           <span style="width: inherit;">
-            <span class="labelLine borderColor" style="margin-top: -70px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -156px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -241px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -326px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -412px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -497px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -582px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -668px;"></span>
-            <span class="labelLine borderColor" style="margin-top: -753px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -78px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -171px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -264px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -356px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -449px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -542px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -635px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -728px;"></span>
+            <span class="labelLine borderColor" style="margin-top: -820px;"></span>
           </span>
-      </article>
+        </article>
+      </div>
       <p id="privacyInfo">This website is an independent platform and is not affiliated with Odyssey Interactive. The content and views expressed on this page do not represent the opinions of Odyssey Interactive or any individuals officially associated with the development or management of Omega Strikers. Omega Strikers and Odyssey Interactive are trademarks or registered trademarks of Odyssey Interactive.</p>
     </main>
     <aside>
@@ -61,46 +63,46 @@
           <div>
             <label>
               <h3>Background Color</h3>
-              <input type="color" value="#000023" onchange="document.querySelector('#themePanel select').value = 'custom';" oninput="changeColor(this?.value, '#playerOverlay', 'background-color')">
+              <input type="color" value="#000023" onchange="document.querySelector('#themePanel select').value = 'custom'; setLastConfig()" oninput="changeColor(this?.value, '#playerOverlay', 'background-color')">
             </label>
             <label>
               <h3>Border Color</h3>
-              <input type="color" value="#6b6889" oninput="changeColor(this?.value, '.borderColor', 'border-color')">
+              <input type="color" value="#6b6889" oninput="changeColor(this?.value, '.borderColor', 'border-color')" onchange="setLastConfig()">
             </label>
             <label>
               <h3>Username Color</h3>
-              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '#username', 'color')">
+              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '#username', 'color')" onchange="setLastConfig()">
             </label>
             <label>
               <h3>Region Color</h3>
-              <input type="color" value="#97baff" oninput="changeColor(this?.value, '.regionColor', 'color')">
+              <input type="color" value="#97baff" oninput="changeColor(this?.value, '.regionColor', 'color')" onchange="setLastConfig()">
             </label>
           </div>
           <div>
             <label>
               <h3>Ranking Color</h3>
-              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.rankingColor', 'color')">
+              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.rankingColor', 'color')" onchange="setLastConfig()">
             </label>
             <label>
               <h3>Stats Name Color</h3>
-              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.statName', 'color')">
+              <input type="color" value="#aaabc7" oninput="changeColor(this?.value, '.statName', 'color')" onchange="setLastConfig()">
             </label>
             <label>
               <h3>Stats Value Color</h3>
-              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '.statValue', 'color')">
+              <input type="color" value="#ffffff" oninput="changeColor(this?.value, '.statValue', 'color')" onchange="setLastConfig()">
             </label>
           </div>
         </div>
         <div id="backgroundPanel">
           <span>
             <h3>Background Image</h3>
-            <input placeholder="Choose a background image" type="file" id="file" name="file" onchange="setFile(this)">
+            <input placeholder="Choose a background image" accept=".webp,.jpg,.jpeg,.png" type="file" id="file" name="file" onchange="setFile(this)">
           </span>
           <span>
             <h3>Shape</h3>
             <div class="selectDiv">
               <span>
-                <select title="selectShape" id="shapeValue" onchange="changeShape(this.value)">
+                <select title="selectShape" id="shapeValue" onchange="changeShape(this.value); setLastConfig();">
                   <option value=1>Rectangle</option>
                   <option value=2 selected>Rounded rectangle</option>
                   <option value=3>Rounded rhomboid - left</option>
@@ -113,7 +115,7 @@
             <h3>Transparency</h3>
             <div class="selectDiv">
               <span>
-                <select title="selectTransparency" id="transparencyValue" onchange="changeTrasparency(this.value)">
+                <select title="selectTransparency" id="transparencyValue" onchange="changeTrasparency(this.value); setLastConfig();">
                   <option value=0 selected>0%</option>
                   <option value=10>10%</option>
                   <option value=20>20%</option>
@@ -133,9 +135,28 @@
     </aside>
     <script>
       const mainDiv = document.querySelector('.statsGrab');
-      updateOverlay();
-      
-      const statsDiv = document.querySelectorAll('.statsGrab .statInfo');
+      const overlayDiv = document.querySelector('.statsLabel ');
+
+      let lastConfig = localStorage.getItem("lastConfig");
+      if (lastConfig) {
+        lastConfig = JSON.parse(lastConfig);
+        updateOverlay(lastConfig?.labelConfig);
+
+        applyTheme(lastConfig?.colors ? null : 'dark-blue', lastConfig?.colors);
+
+        document.getElementById('playerOverlay').style.width = `${lastConfig?.width}px`;
+
+        document.getElementById('playerOverlay').style.backgroundImage = lastConfig?.imageUrl;
+
+        document.querySelector("#shapeValue").value = lastConfig?.shape;
+        changeShape(lastConfig?.shape);
+
+        document.querySelector("#transparencyValue").value = lastConfig?.transparency;
+        changeTrasparency(lastConfig?.transparency);
+      } else
+        updateOverlay("ABC");
+
+      const statsDiv = document.querySelectorAll('.statInfo');
       let draggedEl = null;
 
       statsDiv?.forEach(el => {
@@ -143,7 +164,11 @@
           draggedEl = e.target;
         });
         el.addEventListener("dblclick", function (e) {
-          mainDiv.appendChild(e.target);
+          if (e.target.parentElement == mainDiv)
+            overlayDiv.appendChild(e.target)
+          else
+            mainDiv.appendChild(e.target);
+          setLastConfig();
         });
       });
 
@@ -155,16 +180,19 @@
 
         el.addEventListener('drop', function (e) {
           if (!draggedEl) return;
-          if (el.classList.contains("statInfo"))
+          if (el?.classList.contains("statInfo"))
             el.before(draggedEl);
+          else if (el?.classList.contains("statsGrab"))
+            el?.appendChild(draggedEl);            
           else
-            el.querySelector(".statsLabel").appendChild(draggedEl);
+            el?.querySelector(".statsLabel")?.appendChild(draggedEl);
           draggedEl = null;
+          setLastConfig();
         });
       });
   </script>
   <script>
-    const overlay = document.getElementById('playerOverlay');
+    const overlay = document.querySelector('.statsLabel');
     const lines = document.querySelectorAll(".labelLine");
 
     const resizeObserver = new ResizeObserver(e => {

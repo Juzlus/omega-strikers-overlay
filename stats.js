@@ -2,6 +2,7 @@
 function getStatInfo(session = {}) {
     data = localStorage.getItem("lastUser");
     if (!data) return;
+    console.log(data);
     data = JSON.parse(data);
     const daily = data?.rankedStats ? data?.rankedStats?.lp_history?.filter(el => el[0] > new Date().setHours(0, 0, 0)) : null;
     const strikers = data?.characterStats ? [...data?.characterStats?.forwards, ...data?.characterStats?.goalies]
@@ -146,7 +147,7 @@ function getStatInfo(session = {}) {
         {
             name: "Last Updated",
             code: "{last_updated}",
-            value: `${data?.lastUpdated ? new Date(data?.lastUpdated).toLocaleString() : new Date().toLocaleString()}`
+            value: `${data?.lastUpdated ? new Date(data?.lastUpdated).toISOString().slice(0, 19).replace("T", " ") : new Date().toUTCString().slice(0, 19).replace("T", " ")} UTC`
         }
     ]
 }

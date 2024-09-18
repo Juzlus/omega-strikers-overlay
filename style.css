@@ -7,6 +7,11 @@
     --panelInputHoverColor: #444;
 }
 
+html {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -24,15 +29,15 @@ body {
 
 #mainPage main, #streamelementsPage main {
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 50%;
-    width: 45%;
-    transform: translate(0, -50%);
-    margin-left: calc(50% - 22.5%);
+    left: 50%;
+    min-width: 90%;
 }
 
-#mainPage::after, #streamelementsPage::after {
+#mainPage::after, #streamelementsPage::after, #notFoundPage::after {
     content: '';
-    background-image: url("image/bg.jpg");
+    background-image: url("image/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
@@ -193,12 +198,10 @@ input[type="button"]:hover, #streamelementsPage button:hover {
     background-color: #45a0498c;
 }
 
-footer, #privacyInfo {
+footer {
+    width: 100%;
+    position: absolute;
     bottom: 0;
-    padding: 0;
-    position: fixed;
-    color: #bfbfbf;
-    font-style: oblique;
 }
 
 footer p, #privacyInfo {
@@ -206,11 +209,13 @@ footer p, #privacyInfo {
     font-size: 17.82px;
     text-align: center;
     padding: 10.8px;
+    color: #bfbfbf;
+    font-style: oblique;
 }
 
 [alt="main logo"] {
     width: 702px;
-    max-width: 78vw;
+    max-width: 100%;
 }
 
 #mainLogoSpan {
@@ -229,7 +234,7 @@ footer p, #privacyInfo {
     background-image: url("image/area.png");
     background-repeat: no-repeat;
     background-size: cover;
-    position: absolute;
+    position: fixed;
     background-position-x: center;
     top: 0;
     left: 0;
@@ -288,13 +293,8 @@ footer p, #privacyInfo {
 }
 
 #configurationPage main {
-    position: absolute;
     width: 70%;
-    left: 0;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #configurationPage img[alt="main logo"] {
@@ -308,9 +308,6 @@ footer p, #privacyInfo {
 
 #configurationPage aside {
     width: 30%;
-    height: 99%;
-    position: absolute;
-    right: 0;
     padding-top: 10.8px;
     border-left: 7.02px solid var(--panelBorderColor);
     background-color: var(--panelBgColor);
@@ -328,16 +325,19 @@ footer p, #privacyInfo {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
     background-color: rgb(0, 0, 36);
     resize: horizontal;
     overflow: auto;
     padding: 25px;
     min-width: 326px;
     max-width: 1230px;
-    width: 326px;
+    width: auto;
     border-radius: 10px;
     border: 1.08px solid #6b6889;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
 }
 
 .statsLabel, .statsGrab {
@@ -355,7 +355,14 @@ footer p, #privacyInfo {
 }
 
 .statsGrab {
+    width: 96%;
+    align-content: flex-start;
     display: inline-flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: #33333361;
+    gap: 5px;
+    min-height: 280px;
 }
 
 .statsGrab .statInfo {
@@ -370,6 +377,9 @@ footer p, #privacyInfo {
 
 #labelConf .statInfo {
     padding: 0 10px;
+    min-width: 50px;
+    height: max-content;
+    background-color: var(--panelBgColor);
 }
 
 .statName {
@@ -386,6 +396,14 @@ footer p, #privacyInfo {
     pointer-events: none;
 }
 
+#labelConf .statName {
+    font-size: 12.28px;
+}
+
+#labelConf .statValue {
+    font-size: 14.44px;
+}
+
 #playerOverlay .statValue {
     margin-bottom: 0px;
 }
@@ -397,6 +415,13 @@ footer p, #privacyInfo {
     justify-content: space-around;
     margin-left: 2px;
     scale: 1.2;
+}
+
+#labelConf #favStrikersList {
+    width: 105.04px;
+    margin-left: -8px;
+    margin-top: -2px;
+    scale: 1;
 }
 
 #favStrikersList img {
@@ -608,7 +633,7 @@ input[type=file] {
     padding: 0px 21.6px;
     justify-content: center;
     display: flex;
-    max-height: 54px;
+    max-height: 47px;
 }
 
 input[type=file], select, input[type=color] {
@@ -668,7 +693,7 @@ input[type=file]:hover, select:hover {
 }
 
 h1 {
-    font-size: 27px;
+    font-size: 22px;
 }
 
 h2 {
@@ -678,20 +703,6 @@ h2 {
 h3 {
     font-size: 19.44px;
 }
-
-@media (max-width: 768px) {
-    #configurationPage main {
-        width: 100%;
-    }
-
-    #configurationPage aside {
-        width: 100%;
-        margin-top: 1080px;
-        border-left: none;
-        border-top: 7.02px solid var(--panelBorderColor);
-    }
-}
-
 
 #loading {
     position: fixed;
@@ -705,19 +716,20 @@ h3 {
 #loading::before {
     content: '';
     position: absolute;
-    margin-left: calc(50% - 44px);
-    margin-top: calc(25% - 21.1px);
-    width: 88px;
-    height: 42.2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 54.2px;
     background: radial-gradient(circle closest-side,#ffffff 90%,#0000) 0%   50%,
            radial-gradient(circle closest-side,#ffffff 90%,#0000) 50%  50%,
            radial-gradient(circle closest-side,#ffffff 90%,#0000) 100% 50%;
-    background-size: calc(100%/3) 21.1px;
+    background-size: calc(100%/3) 33.1px;
     background-repeat: no-repeat;
-    animation: dots-7ar3yq 1s infinite linear;
+    animation: dots 1s infinite linear;
 }
     
-@keyframes dots-7ar3yq {
+@keyframes dots {
     20% {
         background-position: 0%   0%, 50%  50%,100%  50%;
     }
@@ -771,6 +783,10 @@ h3 {
     margin: 0 auto;
 }
 
+#configurationPage .statsLabel .statInfo {
+    cursor: grab;
+}
+
 #streamelementsFormated {
     background: #232323 !important;
     color: #747474 !important;
@@ -812,4 +828,302 @@ h3 {
     margin-bottom: 3.24px;
     text-align: center;
     color: floralwhite;
+}
+
+#configurationPage main div:first-child {
+    height: 90%;
+}
+
+#privacyInfo {
+    height: calc(10% - 10px);
+    overflow: hidden;
+    align-content: end;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+#notFoundPage::after {
+    filter: brightness(0.2);
+}
+
+#notFoundPage main {
+    width: 200%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    scale: 0.5;
+    text-align: center;
+    transform: translate(-100%, -100%);
+}
+
+#notFoundPage img {
+    width: 750px;
+    display: block;
+    margin-left: calc(50% - 375px);
+    filter: brightness(0.6);
+}
+
+#notFoundPage div {
+    display: inline-flex;
+    max-height: 270px;
+    overflow: hidden;
+}
+
+#notFoundPage h1 {
+    margin: 0;
+    font-weight: bolder;
+    font-size: 200px;
+    border-right: 20px solid whitesmoke;
+    margin-right: 50px;
+    padding-right: 50px;
+    color: whitesmoke;
+}
+
+#notFoundPage h3 {
+    font-size: 60px;
+    align-content: center;
+    color: whitesmoke;
+    text-align: left;
+}
+
+#notFoundPage a {
+    text-decoration: underline;
+    transition: 0.2s color;
+}
+
+#notFoundPage a:hover {
+    color: #b940cd;
+}
+
+#overlayPage #playerOverlay {
+    left: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    footer p, textarea, button, #configurationPage select, #file, #privacyInfo {
+        font-size: 10px !important;
+        padding: 3px !important;
+    }
+
+    #streamelementsLengthCount {
+        font-size: 10px;
+        margin-top: 54.4px;
+    }
+
+    #streamelementsMain {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    #mainPage article, #clarioncorp {
+        padding: 14.6px;
+    }
+
+    #streamelementsStatCommand {
+        display: none;
+    }
+
+    #clarioncorp h2, input[type="text"], select[name="type"], input[type="button"] {
+        font-size: 10px;
+    }
+
+    #loading::before {
+        width: 100px;
+        background-size: calc(100%/3) 21.1px;
+    }
+
+    #configurationPage aside {
+        margin-top: 0;
+        padding-bottom: 30px;
+    }
+
+    #labelConf h2, #themeConf a, #themeConf h3 {
+        font-size: 10px !important;
+    }
+
+    #labelConf h1, #themeConf h1 {
+        font-size: 13px !important;
+    }
+
+    #configurationPage #labelConf #favStrikersList {
+        width: 127.04px;
+        margin-left: -26px;
+        margin-top: -21px;
+        scale: 0.7;
+    }
+
+    #playerOverlay {
+        left: 50%;
+        scale: 0.5;
+        transform: translate(-100%, -50%);
+    }
+
+    #configurationPage .statsGrab {
+        width: auto;
+    }
+
+    #configurationPage #themeConf label, #configurationPage #backgroundPanel {
+        margin-bottom: 30px;
+    }
+
+    #configurationPage #themeConf span::after, #configurationPage .labelLine {
+        display: none;
+    }
+
+    #configurationPage h1 {
+        font-size: 15px !important;
+    }
+
+    #configurationPage {
+        display: inline-block;
+    }
+
+    #configurationPage main, #configurationPage aside {
+        width: 100%;
+    }
+
+    #configurationPage img:not(#tierImg) {
+        margin: 10px 0 !important;
+    }
+
+    #mainUserData #username {
+        margin: 0;
+    }
+
+    #notFoundPage img {
+        width: 375px;
+        margin-left: calc(50% - 187.5px);
+    }
+
+    #notFoundPage h1 {
+        font-size: 100px;
+        border-right: 10px solid whitesmoke;
+        margin-right: 25px;
+        padding-right: 25px;
+    }
+    
+    #notFoundPage h3 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #configurationPage main {
+        width: 100%;
+    }
+
+    #configurationPage aside {
+        width: 100%;
+        border-left: none;
+        border-top: 7.02px solid var(--panelBorderColor);
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+    footer p, textarea, button, #configurationPage select, #file, #privacyInfo {
+        font-size: 10px !important;
+        padding: 5px !important;
+    }
+
+    #streamelementsLengthCount {
+        font-size: 10px;
+        margin-top: 54.4px;
+    }
+
+    main {
+        scale: 0.5;
+        transform-origin: left top;
+    }
+
+    #streamelementsStatCommand {
+        scale: 0.5;
+        transform-origin: right top;
+    }
+
+    #loading::before {
+        width: 100px;
+        background-size: calc(100%/3) 21.1px;
+    }
+
+    #configurationPage main {
+        scale: 1;
+    }
+
+    #configurationPage aside {
+        margin-top: 10px;
+        padding-bottom: 30px;
+    }
+
+    #labelConf h2, #themeConf a, #themeConf h3 {
+        font-size: 10px !important;
+    }
+
+    #labelConf h1, #themeConf h1 {
+        font-size: 13px !important;
+    }
+
+    #configurationPage img[loading="lazy"] {
+        width: 250px;
+    }
+
+    #configurationPage #labelConf #favStrikersList {
+        width: 127.04px;
+        margin-left: -26px;
+        margin-top: -6px;
+        scale: 0.7;
+    }
+
+    #playerOverlay {
+        left: 50%;
+        scale: 0.5;
+        transform: translate(-100%, -100%)
+    }
+
+    #configurationPage .statsGrab {
+        width: auto;
+    }
+
+    #configurationPage #themeConf label, #configurationPage #backgroundPanel {
+        margin-bottom: 30px;
+    }
+
+    #configurationPage #themeConf span::after, #configurationPage .labelLine {
+        display: none;
+    }
+
+    .statsGrab  {
+        min-height: 158px;
+    }
+
+    #configurationPage h1 {
+        font-size: 15px !important;
+    }
+
+    #configurationPage {
+        display: inline-block;
+    }
+
+    #configurationPage aside, #configurationPage main {
+        width: auto;
+    }
+
+    #notFoundPage img {
+        width: 375px;
+        margin-left: calc(50% - 187.5px);
+    }
+
+    #notFoundPage h1 {
+        font-size: 100px;
+        border-right: 10px solid whitesmoke;
+        margin-right: 25px;
+        padding-right: 25px;
+    }
+    
+    #notFoundPage h3 {
+        font-size: 30px;
+    }
+
+    #notFoundPage main {
+        transform: translate(-50%, -50%);
+    }
 }

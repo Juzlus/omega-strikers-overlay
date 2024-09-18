@@ -5,12 +5,19 @@ function changeColor(color, selector, styleElement) {
 };
 
 function setFile(target) {
-    if(!target?.files?.length)
-    return document.getElementById('playerOverlay').style.backgroundImage = 'none';
+    if(!target?.files?.length) {
+        document.getElementById('playerOverlay').style.backgroundImage = 'none';
+        setLastConfig();
+        return;
+    }
     const file = target?.files[0];
     const reader = new FileReader();
     reader.onloadend = function() {
+        if (reader.result?.length >= 888888)
+            return alert("This image is too large!")
+
         document.getElementById('playerOverlay').style.backgroundImage = `url(${reader.result})`;
+        setLastConfig();
     };
     if(file)
         reader.readAsDataURL(file);
@@ -22,7 +29,7 @@ function changeShape(shapeValue) {
     const element = document.getElementById('playerOverlay');
     if(!element) return;
     element.style.borderRadius = shapeValue == 1 ? '0px' : '10px';
-    element.style.transform = `skewX(${shapeValue == 3 ? 10 : shapeValue == 4 ? -10 : 0}deg)`;
+    element.style.transform = `translate(-50%, -50%) skewX(${shapeValue == 3 ? 10 : shapeValue == 4 ? -10 : 0}deg)`;
     Array.from(document?.getElementsByClassName('label'))?.forEach(el => {
         el.style.transform = `skewX(${shapeValue == 3 ? -10 : shapeValue == 4 ? 10 : 0}deg)`;
     });
@@ -47,8 +54,8 @@ function applyTheme(themeValue, colorsArr) {
     changeColor(themeValue ? colors[themeValue][5] : `#${colorsArr[5]}`, '.statName', 'color');
     changeColor(themeValue ? colors[themeValue][6] : `#${colorsArr[6]}`, '.statValue', 'color');
 
-    document.querySelectorAll('#colorsPanel input[type="color"]').forEach(el => {
-        el.value = colors[themeValue][i];
+    document.querySelectorAll('#colorsPanel input[type="color"]').forEach((el, i) => {
+        el.value = themeValue ? colors[themeValue][i] : `#${colorsArr[i]}`;
     });
 
 };
@@ -71,19 +78,23 @@ function generateUrl() {
     });
     colors = colors?.replace(/#/g, '').slice(0, -1);
 
-    const width = document.getElementById('playerOverlay')?.offsetWidth;
+    const width = document.getElementById('playerOverlay')?.offsetWidth || 350;
     const shape = document?.getElementById('shapeValue')?.value || 2;
     const transparency = document?.getElementById('transparencyValue')?.value || 0;
     const imageUrl = document.getElementById('playerOverlay')?.style?.backgroundImage || 'none';
 
-    window.open(`overlay.html?username=${username}&labelConfig=${labelConfig}&width=${width}&shape=${shape}&transparency=${transparency}&colors=${colors}&imageUrl=${imageUrl}`, '_self');    
+    const url = `overlay.html?username=${username}&labelConfig=${labelConfig}&width=${width}&shape=${shape}&transparency=${transparency}&colors=${colors}&imageUrl=${imageUrl}`;
+    console.log(url)
+    window.open(url, '_self');    
 };
 
 function updateOverlay(labelConfig=null, session={})
 {
-    const mainDiv = document.querySelector(labelConfig ? '.statsLabel' : '.statsGrab');
+    const mainDiv = document.querySelector('.statsGrab');
+    const configDiv = document.querySelector('.statsLabel');
     const stats = getStatInfo(session);
     let mainDivHTML = '';
+    let configDivHTML = '';
 
     stats?.forEach((el, i) => {
         if(el?.element_id) {
@@ -91,7 +102,7 @@ function updateOverlay(labelConfig=null, session={})
             if (el?.element_id == "tier")
                 document.getElementById("tierImg").src = `image/RankedTiers/Rank_${el?.value?.includes("Unranked") ? "Low_Rookie" : el?.value?.replace(/ /g, "_")}.webp`;
         }
-        else if(!labelConfig)
+        else if(!labelConfig.includes(String.fromCharCode(i + 65)))
             mainDivHTML += `<span class="statInfo grabLabel" draggable="true" labelConfig="${String.fromCharCode(i + 65)}"><h2 class="statName">${el?.name}</h2><h2 class="statValue">${el?.value}</h2></span>`;
     });
 
@@ -100,11 +111,14 @@ function updateOverlay(labelConfig=null, session={})
         if (find)
             find.querySelector('h2.statValue').innerHTML = stats[el.charCodeAt(0) - 65]?.value;
         else
-            mainDivHTML += `<span class="statInfo grabLabel" draggable="true" labelConfig="${el}"><h2 class="statName">${stats[el.charCodeAt(0) - 65]?.name}</h2><h2 class="statValue">${stats[el.charCodeAt(0) - 65]?.value}</h2></span>`;
+            configDivHTML += `<span class="statInfo grabLabel" draggable="true" labelConfig="${el}"><h2 class="statName">${stats[el.charCodeAt(0) - 65]?.name}</h2><h2 class="statValue">${stats[el.charCodeAt(0) - 65]?.value}</h2></span>`;
     });
 
     if(mainDiv && mainDivHTML)
         mainDiv.innerHTML = mainDivHTML;
+
+    if(configDiv && configDivHTML)
+        configDiv.innerHTML = configDivHTML;
 }
 
 async function setupConfiguration() {
@@ -121,7 +135,7 @@ async function setupConfiguration() {
 
     const session = {};
 
-    const height = document.getElementById('playerOverlay')?.offsetHeight || 0;
+    const height = document.querySelector('.statsLabel')?.offsetHeight || 0;
     const lines = document.querySelectorAll(".labelLine");
     const rows = height / 100 - 1;
     lines?.forEach((el, i) => {
@@ -148,7 +162,7 @@ async function setupConfiguration() {
     changeTrasparency(transparency || 0);
     updateOverlay(labelConfig);
     if (colors?.length) applyTheme(null, colors);
-    document.getElementById('playerOverlay').style.backgroundImage = `'${imageUrl || 'none'}'`;
+    document.getElementById('playerOverlay').style.backgroundImage = imageUrl ? imageUrl?.replace(/ /g, '+') : 'none';
 
     setInterval(async () => {
         await $.ajax({ url: `https://clarioncorp.net/api/lookup/${username}`, method: 'GET',
@@ -188,6 +202,30 @@ function convertViewToText(text) {
     return text;
 }
 
+function setLastConfig() {
+    let labelConfig = '';
+    document?.querySelectorAll('#playerOverlay .statInfo')?.forEach((el, i) => {
+        labelConfig += el.getAttribute("labelConfig") || '';
+    });
+
+    let colors = '';
+    document?.querySelectorAll('input[type="color"]')?.forEach(el => {
+        colors += `${el?.value || 'fff'},`;
+    });
+    colors = colors?.replace(/#/g, '').slice(0, -1);
+
+    const lastConfigData = {
+        labelConfig: labelConfig,
+        colors: colors ? colors.split(',') : null,
+        width: document.getElementById('playerOverlay')?.offsetWidth || 350,
+        shape: document?.getElementById('shapeValue')?.value || 2,
+        transparency: document?.getElementById('transparencyValue')?.value || 0,
+        imageUrl: document.getElementById('playerOverlay')?.style?.backgroundImage || 'none'
+    }
+
+    localStorage.setItem("lastConfig", JSON.stringify(lastConfigData));
+}
+
 let maxLength = 500 - 112 - 7;
 function previewFormated(e) {
     document.getElementById('streamelementsFormated').value = convertViewToText(e.value);
@@ -216,7 +254,6 @@ function createLinkStreamElements(e) {
             e.innerText = 'COPY LINK';
         }, 1500);
     }
-
 }
 
 function createStatsBlock() {
