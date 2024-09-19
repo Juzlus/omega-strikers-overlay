@@ -245,7 +245,7 @@ function createLinkStreamElements(e) {
 
     const raw = document.getElementById("streamelementsRaw").value;
     const fetchURL = `http://juzlus-omega-strikers.infinityfreeapp.com/?view=${raw}&username=\$\{pathescape \$\{1\} | ${data?.rankedStats?.username}\}`;
-    const link = `\$\{sender\} \$(customapi. '${fetchURL}')`;
+    const link = `\$\{sender\} \$(customapi. '${fetchURL.replace(/'/g, "\\'")}')`;
     navigator.clipboard.writeText(link);
 
     if (e.innerText != 'COPIED') {

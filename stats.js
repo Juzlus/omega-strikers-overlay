@@ -2,7 +2,7 @@
 function getStatInfo(session = {}) {
     data = localStorage.getItem("lastUser");
     if (!data) return;
-    console.log(data);
+
     data = JSON.parse(data);
     const daily = data?.rankedStats ? data?.rankedStats?.lp_history?.filter(el => el[0] > new Date().setHours(0, 0, 0)) : null;
     const strikers = data?.characterStats ? [...data?.characterStats?.forwards, ...data?.characterStats?.goalies]
@@ -107,7 +107,7 @@ function getStatInfo(session = {}) {
         {
             name: "Daily Games",
             code: "{daily_games}",
-            value: `${daily?.length ? daily?.length : 0}`
+            value: `${daily?.length ? daily.filter((el, i, arr) => (i < arr.length - 1 && arr[i + 1][1] > el[1] ))?.length + daily.filter((el, i, arr) => (i > 0 && arr[i - 1][1] < el[1] ))?.length : 0}`
         },
         {
             name: "Rating Display",

@@ -11,10 +11,22 @@
         if (!$data || isset($data['error']))
             return null;
 
-        $daily = isset($data['rankedStats']['lp_history']) ? array_filter($data['rankedStats']['lp_history'], function($el) {
-            return $el[0] > strtotime("today");
+        $daily = isset($data['rankedStats']) ? array_filter($data['rankedStats']['lp_history'], function($el) {
+            return $el[0] > (strtotime("today") * 1000);
         }) : null;
 
+        $daily_wins = isset($daily) && count($daily) > 0 
+            ? count(array_filter($daily, function($el, $i) use ($daily) {
+                return $i < count($daily) - 1 && $daily[$i + 1][1] > $el[1];
+            }, ARRAY_FILTER_USE_BOTH
+            )) : 0; 
+            
+        $daily_losses = isset($daily) && count($daily) > 0 
+            ? count(array_filter($daily, function($el, $i) use ($daily) {
+                return $i > 0 && $daily[$i - 1][1] < $el[1];
+            }, ARRAY_FILTER_USE_BOTH
+            )) : 0;
+            
         $strikers = isset($data['characterStats']) ? array_merge($data['characterStats']['forwards'], $data['characterStats']['goalies']) : [];
         $strikers = array_reduce($strikers, function($arr, $el) {
             $elName = substr($el['name'], 3);
@@ -102,8 +114,8 @@
             [
                 'code' => "{daily_wl}",
                 'value' => count($daily) 
-                            ? count(array_filter($daily, function($el) { return $el[1] > 0; })) . '/' . count(array_filter($daily, function($el) { return $el[1] < 0; }))
-                            : "0/0"
+                            ? $daily[0][1] - $daily[count($daily) - 1][1] 
+                            : 0
             ],
             [
                 'code' => "{daily_lp}",
@@ -113,7 +125,7 @@
             ],
             [
                 'code' => "{daily_games}",
-                'value' => count($daily) ? count($daily) : 0
+                'value' => count($daily) ? ($daily_wins + $daily_losses) : 0
             ],
             [
                 'code' => "{rating_display}",
@@ -141,7 +153,7 @@
             ],
             [
                 'code' => "{last_updated}",
-                'value' => isset($data['lastUpdated']) ? date("Y-m-d H:i:s", strtotime($data['lastUpdated'])) : date("Y-m-d H:i:s")
+                'value' => isset($data['lastUpdated']) ? date("Y-m-d H:i:s", strtotime($data['lastUpdated'])). " UTC" : date("Y-m-d H:i:s"). " UTC"
             ]
         ];
         return $stats;
