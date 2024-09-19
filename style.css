@@ -337,7 +337,7 @@ footer p, #privacyInfo {
     position: absolute;
     top: 50%;
     left: 35%;
-    transform: translate(-50%, -50%);
+    translate: -50% -50%;
 }
 
 .statsLabel, .statsGrab {
@@ -959,7 +959,7 @@ h3 {
     }
 
     #configurationPage .statsGrab {
-        width: auto;
+        width: -webkit-fill-available;
     }
 
     #configurationPage #themeConf label, #configurationPage #backgroundPanel {
@@ -1080,7 +1080,7 @@ h3 {
     }
 
     #configurationPage .statsGrab {
-        width: auto;
+        width: -webkit-fill-available;
     }
 
     #configurationPage #themeConf label, #configurationPage #backgroundPanel {

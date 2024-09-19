@@ -29,7 +29,7 @@ function changeShape(shapeValue) {
     const element = document.getElementById('playerOverlay');
     if(!element) return;
     element.style.borderRadius = shapeValue == 1 ? '0px' : '10px';
-    element.style.transform = `translate(-50%, -50%) skewX(${shapeValue == 3 ? 10 : shapeValue == 4 ? -10 : 0}deg)`;
+    element.style.transform = `skewX(${shapeValue == 3 ? 10 : shapeValue == 4 ? -10 : 0}deg)`;
     Array.from(document?.getElementsByClassName('label'))?.forEach(el => {
         el.style.transform = `skewX(${shapeValue == 3 ? -10 : shapeValue == 4 ? 10 : 0}deg)`;
     });
