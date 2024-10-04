@@ -100,7 +100,11 @@ function updateOverlay(labelConfig=null, session={})
         if(el?.element_id) {
             document.getElementById(el.element_id).innerText = el?.value;
             if (el?.element_id == "tier")
+            {
+                if (!['Mid', 'Low', 'High'].filter(e => el?.value?.includes(e)).length)
+                    el.value = `Mid_${el.value}`;
                 document.getElementById("tierImg").src = `image/RankedTiers/Rank_${el?.value?.includes("Unranked") ? "Low_Rookie" : el?.value?.replace(/ /g, "_")}.webp`;
+            }
         }
         else if(!labelConfig.includes(String.fromCharCode(i + 65)))
             mainDivHTML += `<span class="statInfo grabLabel" draggable="true" labelConfig="${String.fromCharCode(i + 65)}"><h2 class="statName">${el?.name}</h2><h2 class="statValue">${el?.value}</h2></span>`;
